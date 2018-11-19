@@ -3,10 +3,10 @@ $(document).ready(function(){
     var topics = ["Thor", "DeadPool", "Hulk"];
     //Try using a loop that appends a button for each string in the array.
     for (var i = 0; i < topics.length; i++) {
-        var heroButton = $("<button>");
+        var heroButton = $("<button>" + topics[i]);
         $("#buttonrow").append(heroButton);
-        heroButton.addClass("data-hero");
-        heroButton.text(topics[i]);
+        // heroButton.addClass("data-hero");
+         heroButton.text(topics[i]);
         
         //still need to get the query search to match up with the buttons as they're created from the array.  Keeps saying "undefined"
         
