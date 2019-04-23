@@ -1,16 +1,26 @@
 $(document).ready(function(){
 
     var topics = ["Thor", "DeadPool", "Hulk"];
-    //Try using a loop that appends a button for each string in the array.
-    for (var i = 0; i < topics.length; i++) {
-        var heroButton = $("<button>" + topics[i]);
-        $("#buttonrow").append(heroButton);
-        // heroButton.addClass("data-hero");
-         heroButton.text(topics[i]);
-        
+    
+    //a function to make new buttons and add them to the page
+
+    function populateButtons(arrayToUse, classToAdd, areaToAddTo) {
+        $(areaToAddTo).empty();
+
+        for (var i = 0; i < arrayToUse.length; i++) {
+            var heroButton = $("<button>");
+            heroButton.addClass(classToAdd);
+            heroButton.attr("data-type", arrayToUse[i]);
+            heroButton.text(arrayToUse[i]);
+            $(areaToAddTo).append(heroButton);
+        }
+    }
+
+
+    
         //still need to get the query search to match up with the buttons as they're created from the array.  Keeps saying "undefined"
         
-    }
+    
     //function for existing buttons
     $("button").on("click", function() {
         var hero = $(this).attr("data-hero");
