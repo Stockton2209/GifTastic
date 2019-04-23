@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    var heroes = ["Thor", "DeadPool", "Hulk"];
+    var villains = ["Thanos", "Loki", "Ronan", "Red Skull"];
     
     //a function to make new buttons and add them to the page
 
@@ -8,25 +8,25 @@ $(document).ready(function(){
         $(areaToAddTo).empty();
 
         for (var i = 0; i < arrayToUse.length; i++) {
-            var heroButton = $("<button>");
-            heroButton.addClass(classToAdd);
-            heroButton.attr("data-type", arrayToUse[i]);
-            heroButton.text(arrayToUse[i]);
-            $(areaToAddTo).append(heroButton);
+            var a = $("<button>");
+            a.addClass(classToAdd);
+            a.attr("data-type", arrayToUse[i]);
+            a.text(arrayToUse[i]);
+            $(areaToAddTo).append(a);
         }
     }
 
         
     
     //function for existing buttons
-    $(document).on("click", ".hero-button", function() {
-        $("#heroes").empty();
-        $(".hero-button").removeClass("active");
+    $(document).on("click", ".villain-button", function() {
+        $("#villains").empty();
+        $(".villain-button").removeClass("active");
         $(this).addClass("active");
 
-        var hero = $(this).attr("data-type");
+        var type = $(this).attr("data-type");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            hero + "&api_key=3py1RuALUF0LD8CYLusa9S90ghZ0LP1w&limit=10";
+            type + "&api_key=3py1RuALUF0LD8CYLusa9S90ghZ0LP1w&limit=10";
 
     //ajax request
     $.ajax({
@@ -39,8 +39,8 @@ $(document).ready(function(){
 
             //for loop to go through results and grab specific attributes
             for (var i = 0; i < results.length; i++) {
-            //variables to hold divs created by gifs added to the page 
-                var heroDiv = $("<div class=\"hero-item\">");
+                //variables to hold divs created by gifs added to the page 
+                var villainDiv = $("<div class=\"villain-item\">");
                 
                 var rating = results[i].rating;
 
@@ -51,24 +51,24 @@ $(document).ready(function(){
 
 
 
-                var heroImage = $("<img>");
+                var villainImage = $("<img>");
 
-                heroImage.attr("src", still);
-                heroImage.attr("data-still", still);
-                heroImage.attr("data-animate", animated);
-                heroImage.attr("data-state", "still");
-                heroImage.addClass("hero-image");
+                villainImage.attr("src", still);
+                villainImage.attr("data-still", still);
+                villainImage.attr("data-animate", animated);
+                villainImage.attr("data-state", "still");
+                villainImage.addClass("villain-image");
                 //adding the attributes to make the gifs animated or still
 
-                heroDiv.append(p);
-                heroDiv.append(heroImage); 
+                villainDiv.append(p);
+                villainDiv.append(villainImage); 
 
-                $("#heroes").append(heroDiv);
+                $("#villains").append(villainDiv);
             }
         });
     });
 
-    $(document).on("click", ".hero-image", function() {
+    $(document).on("click", ".villain-image", function() {
 
         var state = $(this).attr("data-state");
     
@@ -82,19 +82,19 @@ $(document).ready(function(){
         }
       });
 
-      // have the summon button find new heroes
-      $("#add-hero").on("click", function(event) {
+      // have the summon button find new villains
+      $("#add-villain").on("click", function(event) {
           event.preventDefault();
-          var newHero = $("input").eq(0).val();
+          var newVillain = $("input").eq(0).val();
 
-          if (newHero.length > 2) {
-              heroes.push(newHero);
+          if (newVillain.length > 2) {
+              villains.push(newVillain);
           }
 
-          populateButtons(heroes, "hero-button", "#hero-buttons");
+          populateButtons(villains, "villain-button", "#villain-buttons");
 
       });
 
-      populateButtons(heroes, "hero-button", "#hero-buttons");
+      populateButtons(villains, "villain-button", "#villain-buttons");
     
 });

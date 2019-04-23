@@ -23,12 +23,12 @@ input[type="submit"] {
   box-shadow: 2px 2px 3px #bbb;
 }
 
-#heroes {
+#villians {
     width: 70%;
     background: grey;
 }
 
-.hero-item {
+.villain-item {
     float: left;
     padding: 10px;
   }
