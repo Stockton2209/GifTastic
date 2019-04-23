@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    var topics = ["Thor", "DeadPool", "Hulk"];
+    var heroes = ["Thor", "DeadPool", "Hulk"];
     
     //a function to make new buttons and add them to the page
 
@@ -16,59 +16,82 @@ $(document).ready(function(){
         }
     }
 
-
-    
-        //still need to get the query search to match up with the buttons as they're created from the array.  Keeps saying "undefined"
         
     
     //function for existing buttons
-    $("button").on("click", function() {
-        var hero = $(this).attr("data-hero");
+    $(document).on("click", ".hero-button", function() {
+        $("#heroes").empty();
+        $(".hero-button").removeClass("active");
+        $(this).addClass("active");
+
+        var hero = $(this).attr("data-type");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
             hero + "&api_key=3py1RuALUF0LD8CYLusa9S90ghZ0LP1w&limit=1";
+
     //ajax request
     $.ajax({
         url: queryURL,
         method: "GET"
-        })
+    })
         .then(function(response) {
-            console.log(queryURL);
-            console.log(response);
-            
             //storing the data from the AJAX request
             var results = response.data;
+
             //for loop to go through results and grab specific attributes
             for (var i = 0; i < results.length; i++) {
             //variables to hold divs created by gifs added to the page 
-                var heroDiv = $("<div>");
-            //adding the rating data to each image
+                var heroDiv = $("<div class=\"hero-item\">");
+                //adding the rating data to each image
                 var p = $("<p>").text("Rating: " + results[i].rating);
+
+                var animated = results[i].images.fixed_height.url;
+                var still = results[i].images.fixed_height_still.url; 
+
+
+
                 var heroImage = $("<img>");
-                heroImage.attr("src", results[i].images.fixed_height.url);
-            //adding the attributes to make the gifs animated or still
-                heroImage.attr("data-stil", results[i].images.fixed_height.url);
-                heroImage.attr("data-animate", results[i].images.fixed_height.url);
+                heroImage.attr("src", still);
+                heroImage.attr("data-still", still);
+                heroImage.attr("data-animate", animated);
+                heroImage.attr("data-state", "still");
+                heroImage.addClass("hero-image");
+                //adding the attributes to make the gifs animated or still
+
                 heroDiv.append(heroImage);
                 heroDiv.append(p);
-                
+                    
 
-                $("#gifs-go-here").prepend(heroDiv);
+                $("#heroes").append(heroDiv);
             }
         });
     });
 
+    $(document).on("click", ".hero-image", function() {
 
-    //function to render new buttons
-        //take search input and add it to the topics array
-        //have it create a new button
-
-    //create a function to check/alter the data-state of each image
-        //make variables to assign the data state value, the still value and the animated value
-        //use if/else statements to change between the two states when clicked
-
-    //also still need to link this whole thing to my portfolio
+        var state = $(this).attr("data-state");
     
-    
+        if (state === "still") {
+          $(this).attr("src", $(this).attr("data-animate"));
+          $(this).attr("data-state", "animate");
+        }
+        else {
+          $(this).attr("src", $(this).attr("data-still"));
+          $(this).attr("data-state", "still");
+        }
+      });
 
+      $("add-hero").on("click", function(event) {
+          event.preventDefault();
+          var newHero = $("input").eq(0).val();
+
+          if (newHero.length > 2) {
+              heroes.push(newHero);
+          }
+
+          populateButtons(heroes, "hero-button", "#hero-buttons");
+
+      });
+
+      populateButtons(heroes, "hero-button", "#hero-buttons");
     
 });
