@@ -26,7 +26,7 @@ $(document).ready(function(){
 
         var hero = $(this).attr("data-type");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            hero + "&api_key=3py1RuALUF0LD8CYLusa9S90ghZ0LP1w&limit=1";
+            hero + "&api_key=3py1RuALUF0LD8CYLusa9S90ghZ0LP1w&limit=10";
 
     //ajax request
     $.ajax({
@@ -41,8 +41,10 @@ $(document).ready(function(){
             for (var i = 0; i < results.length; i++) {
             //variables to hold divs created by gifs added to the page 
                 var heroDiv = $("<div class=\"hero-item\">");
-                //adding the rating data to each image
-                var p = $("<p>").text("Rating: " + results[i].rating);
+                
+                var rating = results[i].rating;
+
+                var p = $("<p>").text("Rating: " + rating);
 
                 var animated = results[i].images.fixed_height.url;
                 var still = results[i].images.fixed_height_still.url; 
@@ -50,6 +52,7 @@ $(document).ready(function(){
 
 
                 var heroImage = $("<img>");
+
                 heroImage.attr("src", still);
                 heroImage.attr("data-still", still);
                 heroImage.attr("data-animate", animated);
@@ -57,9 +60,8 @@ $(document).ready(function(){
                 heroImage.addClass("hero-image");
                 //adding the attributes to make the gifs animated or still
 
-                heroDiv.append(heroImage);
                 heroDiv.append(p);
-                    
+                heroDiv.append(heroImage); 
 
                 $("#heroes").append(heroDiv);
             }
@@ -80,7 +82,8 @@ $(document).ready(function(){
         }
       });
 
-      $("add-hero").on("click", function(event) {
+      // have the summon button find new heroes
+      $("#add-hero").on("click", function(event) {
           event.preventDefault();
           var newHero = $("input").eq(0).val();
 
