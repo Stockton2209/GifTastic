@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    var villains = ["Thanos", "Loki", "Ronan", "Red Skull"];
+    var villains = ["Thanos", "Loki", "Venom", "Red Skull"];
     
     //a function to make new buttons and add them to the page
 

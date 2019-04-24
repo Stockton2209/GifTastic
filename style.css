@@ -1,7 +1,22 @@
 
-header {
+.header {
     text-align: center;
-    padding: 25px;
+    padding: 10px;
+    font-family: 'Comic sans ms';
+    border-style: groove;
+}
+
+/* html {
+    background-image: url();
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
+
+body {
+    max-width: 960px;
+    padding: 1%;
+    margin: auto;
+    background-color: rgb(255,255,255, .7);
 }
 
 form {
@@ -13,7 +28,7 @@ form {
 button,
 input[type="submit"] {
   padding: 5px 20px;
-  margin: 0 10px 10px 0;
+  margin: 5px 10px 10px 0;
   font-size: 18px;
   color: #fff;
   cursor: pointer;
@@ -26,9 +41,43 @@ input[type="submit"] {
 #villians {
     width: 70%;
     background: grey;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .villain-item {
     float: left;
     padding: 10px;
   }
+
+  label {
+    font-family: 'Bangers', cursive;
+    margin-right: 1%;
+    font-size: 1.5em;  
+}
+
+
+
+
+
+
+@media only screen and (max-width: 1000px) {
+    html, body {
+        min-height: 100%;
+        background-repeat: repeat;
+    }
+    .gifLocation {
+        flex-direction: column;
+    }
+    div {
+        display: inline-block;
+        text-align: center;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    img {
+        max-width: 95%;
+    }
+
+}
