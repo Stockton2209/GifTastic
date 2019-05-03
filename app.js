@@ -20,7 +20,7 @@ $(document).ready(function(){
     
     //function for existing buttons
     $(document).on("click", ".villain-button", function() {
-        $("#villains").empty();
+        $(".villains").empty();
         $(".villain-button").removeClass("active");
         $(this).addClass("active");
 
@@ -53,17 +53,18 @@ $(document).ready(function(){
 
                 var villainImage = $("<img>");
 
+                //adding the attributes to make the gifs animated or still
                 villainImage.attr("src", still);
                 villainImage.attr("data-still", still);
                 villainImage.attr("data-animate", animated);
                 villainImage.attr("data-state", "still");
                 villainImage.addClass("villain-image");
-                //adding the attributes to make the gifs animated or still
+                
 
                 villainDiv.append(p);
                 villainDiv.append(villainImage); 
 
-                $("#villains").append(villainDiv);
+                $(".villains").append(villainDiv);
             }
         });
     });
@@ -83,6 +84,7 @@ $(document).ready(function(){
       });
 
       // have the summon button find new villains
+      
       $("#add-villain").on("click", function(event) {
           event.preventDefault();
           var newVillain = $("input").eq(0).val();

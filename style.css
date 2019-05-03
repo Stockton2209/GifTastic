@@ -6,17 +6,18 @@
     border-style: groove;
 }
 
-/* html {
-    background-image: url();
+html {
+    background-image: url("../images/EvilLair.jpg");
+    background-size: 100%;
     background-repeat: no-repeat;
-    background-size: cover;
-} */
+}
 
 body {
     max-width: 960px;
     padding: 1%;
     margin: auto;
-    background-color: rgb(255,255,255, .7);
+    
+
 }
 
 form {
@@ -38,7 +39,7 @@ input[type="submit"] {
   box-shadow: 2px 2px 3px #bbb;
 }
 
-#villians {
+.villians {
     width: 70%;
     background: grey;
     display: flex;
@@ -64,7 +65,7 @@ input[type="submit"] {
 @media only screen and (max-width: 1000px) {
     html, body {
         min-height: 100%;
-        background-repeat: repeat;
+        background-repeat: no-repeat;
     }
     .gifLocation {
         flex-direction: column;
