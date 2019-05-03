@@ -3,7 +3,7 @@ $(document).ready(function(){
     var villains = ["Thanos", "Loki", "Venom", "Red Skull"];
     
     //a function to make new buttons and add them to the page
-
+    
     function populateButtons(arrayToUse, classToAdd, areaToAddTo) {
         $(areaToAddTo).empty();
 
@@ -34,12 +34,14 @@ $(document).ready(function(){
         method: "GET"
     })
         .then(function(response) {
+
             //storing the data from the AJAX request
             var results = response.data;
 
             //for loop to go through results and grab specific attributes
             for (var i = 0; i < results.length; i++) {
-                //variables to hold divs created by gifs added to the page 
+
+                //variables to hold divs created by added gifs to the page 
                 var villainDiv = $("<div class=\"villain-item\">");
                 
                 var rating = results[i].rating;
@@ -60,7 +62,7 @@ $(document).ready(function(){
                 villainImage.attr("data-state", "still");
                 villainImage.addClass("villain-image");
                 
-
+                // add the gifs
                 villainDiv.append(p);
                 villainDiv.append(villainImage); 
 
@@ -73,6 +75,8 @@ $(document).ready(function(){
 
         var state = $(this).attr("data-state");
     
+
+        // check if state is still, if so, update to animate. Also does the reverse.
         if (state === "still") {
           $(this).attr("src", $(this).attr("data-animate"));
           $(this).attr("data-state", "animate");
@@ -84,7 +88,7 @@ $(document).ready(function(){
       });
 
       // have the summon button find new villains
-      
+
       $("#add-villain").on("click", function(event) {
           event.preventDefault();
           var newVillain = $("input").eq(0).val();
@@ -93,10 +97,12 @@ $(document).ready(function(){
               villains.push(newVillain);
           }
 
+          // call the populateButtons function to display the list of villains
           populateButtons(villains, "villain-button", "#villain-buttons");
 
       });
 
+      // need to populate the initial list of villains
       populateButtons(villains, "villain-button", "#villain-buttons");
     
 });
